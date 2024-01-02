@@ -14,11 +14,10 @@ library
                     , Types.Env
  -- other-extensions:
   build-depends:      base >= 4.12 && < 5
-                    , aeson
                     , mtl
-                    , servant
-                    , text
-                    , uuid-types
+                    , network
+                    , servant-server
+                    , sqlite-simple
   hs-source-dirs:      lib
   default-language:    Haskell2010
   default-extensions:  DerivingStrategies, NoGeneralisedNewtypeDeriving, ImportQualifiedPost, OverloadedStrings, UnicodeSyntax

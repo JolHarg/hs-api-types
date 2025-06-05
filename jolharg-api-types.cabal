@@ -1,30 +1,26 @@
-cabal-version:      3.0
+cabal-version:      3.12
 name:               jolharg-api-types
-version:            0.1.0.0
+version:            0.2.0.0
 license:            AGPL-3.0-only
 author:             Dan Dart
 maintainer:         git@dandart.co.uk
-
 -- copyright:
 -- category:
 build-type:         Simple
 extra-source-files:
   CHANGELOG.md
   README.md
-
 library
   exposed-modules:
     Types.App
     Types.Env
-
   -- other-extensions:
   build-depends:
-    , base            >=4.20.0.0 && <5
-    , mtl
-    , network
-    , servant-server
-    , sqlite-simple
-
+    , base            ^>=4.21.0.0
+    , mtl             ^>=2.3.1
+    , network         ^>=3.2.7.0
+    , servant-server  ^>=0.20.2
+    , sqlite-simple   ^>=0.4.19.0
   hs-source-dirs:     lib
   default-language:   GHC2024
   default-extensions:
@@ -32,7 +28,6 @@ library
     NoGeneralisedNewtypeDeriving
     OverloadedStrings
     UnicodeSyntax
-
   ghc-options:
     -Wall -Werror -Weverything -Wno-unsafe -Wno-safe
     -Wno-missing-import-lists -Wno-missing-export-lists
@@ -45,6 +40,8 @@ library
     -Wno-missed-specialisations
 
 test-suite jolharg-api-types-test
+  if arch(javascript) || arch(wasm32)
+    buildable: False
   hs-source-dirs:     test
   type:               exitcode-stdio-1.0
   default-language:   GHC2024
@@ -53,10 +50,11 @@ test-suite jolharg-api-types-test
     NoGeneralisedNewtypeDeriving
     OverloadedStrings
     UnicodeSyntax
-
   main-is:            Spec.hs
+  if !arch(wasm32)
+    ghc-options: -threaded -rtsopts -with-rtsopts=-N 
   ghc-options:
-    -Wall -Werror -threaded -rtsopts -with-rtsopts=-N -Weverything
+    -Wall -Werror -Weverything
     -Wno-unsafe -Wno-safe -Wno-missing-import-lists
     -Wno-missing-export-lists -Wno-implicit-prelude
     -Wno-missing-local-signatures -Wno-missing-safe-haskell-mode
@@ -65,11 +63,9 @@ test-suite jolharg-api-types-test
     -Wno-missed-specialisations -Wno-missing-role-annotations
     -Wno-missing-kind-signatures -Wno-missing-poly-kind-signatures
     -Wno-unrecognised-warning-flags -Wno-missed-specialisations
-
   build-depends:
-    , base   >=4.20.0.0 && <5
-    , hspec
-
+    , base   ^>=4.21.0.0
+    , hspec  ^>=2.11.12
   -- , jolharg-api-types
   -- , hspec-core
   -- , hspec-expectations

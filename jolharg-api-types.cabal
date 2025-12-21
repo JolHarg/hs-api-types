@@ -19,7 +19,7 @@ library
 
   -- other-extensions:
   build-depends:
-    , base            >=4.21 && <4.23
+    , base            ^>=4.22
     , mtl             ^>=2.3.1
     , network         ^>=3.2.7
     , servant-server  ^>=0.20.3
@@ -72,7 +72,7 @@ test-suite jolharg-api-types-test
     -Wno-missed-specialisations
 
   build-depends:
-    , base   >=4.21 && <4.23
+    , base   ^>=4.22
     , hspec  ^>=2.11.15
 
   -- , jolharg-api-types
